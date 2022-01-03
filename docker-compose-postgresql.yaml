@@ -1,0 +1,30 @@
+version: "3.1"
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 'loucuragem'
+    ports:
+      - "15432:5432"
+    volumes:
+      - ~/docker-volumes/postgresql:/var/lib/postgresql/data
+    networks:
+      - postgres-compose-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "j.martins@nordware.io"
+      PGADMIN_DEFAULT_PASSWORD: "102030"
+    ports:
+      - "16543:80"
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+
+networks: 
+  postgres-compose-network:
+    driver: bridge

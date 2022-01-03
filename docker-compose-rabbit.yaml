@@ -1,0 +1,13 @@
+version: "3.1"
+services:
+  rabbitmq:
+    image: rabbitmq-dev
+    restart: always
+    build:
+      context: .
+      dockerfile: rabbitmq-custom.dockerfile
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - '~/docker-volumes/rabbitmq'
